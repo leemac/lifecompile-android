@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.tinycore.lifecompile.R;
 
-public class HomeActivity extends AppCompatActivity {
+public abstract class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +16,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Button fab = (Button) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

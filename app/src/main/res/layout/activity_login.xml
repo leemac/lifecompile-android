@@ -1,3 +1,4 @@
+<!--suppress AndroidMissingOnClickHandler -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +9,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity"
+    tools:ignore="Overdraw">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,8 +20,8 @@
         android:paddingBottom="75dp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="34dp"
-        android:text="LifeCompile"/>
+        android:textSize="34sp"
+        android:text="@string/app_name"/>
 
     <ProgressBar
         android:id="@+id/progressBarLoading"
@@ -36,18 +38,17 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:hint="Email"
-            android:text="lee@lee.com"
+            android:hint="@string/emailText"
             android:id="@+id/textboxEmail"
+            android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:hint="Password"
-            android:text="123456"
+            android:hint="@string/passwordText"
             android:id="@+id/textboxPassword"
-            android:password="true"
+            android:inputType="textPassword"
             android:textColor="@color/white"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -55,7 +56,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/loginText"
             android:onClick="loginClick"/>
 
         <TextView
@@ -63,9 +64,9 @@
             android:layout_height="match_parent"
             android:gravity="bottom|center"
             android:onClick="forgotPasswordClick"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textColor="@color/white"
-            android:text="I forgot my password"/>
+            android:text="@string/i_forgot_my_password"/>
 
     </LinearLayout>
 

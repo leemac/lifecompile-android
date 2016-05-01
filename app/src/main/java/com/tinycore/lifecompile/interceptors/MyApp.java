@@ -1,8 +1,11 @@
 package com.tinycore.lifecompile.interceptors;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+@SuppressLint("Registered")
+@SuppressWarnings("unused")
 public class MyApp extends Application {
     private static MyApp instance;
 
