@@ -1,4 +1,11 @@
 language: android
+
+sudo: false
+env:
+  global:
+    - ANDROID_ABI=armeabi-v7a
+    - ADB_INSTALL_TIMEOUT=8
+
 android:
   components:
     # Uncomment the lines below if you want to
@@ -13,5 +20,3 @@ android:
     - android-23
 
     - extra-android-m2repository
-
-    - sys-img-armeabi-v7a-android-21
