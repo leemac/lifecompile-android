@@ -1,5 +1,6 @@
 package com.tinycore.lifecompile.interceptors;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -18,15 +19,16 @@ public class AccessTokenInterceptor implements Interceptor {
 
         Log.d("Token Intercepter", request.url().toString());
 
-        Log.d("Token Intercepter", request.body().toString());
-//
-//        SharedPreferences settings = PreferenceManager
-//                .getDefaultSharedPreferences(MyApp.getContext());
-//        String token = settings.getString("token", "");
+        Context context = MyApp.getContext();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String token = settings.getString("token", "");
 
         Request newRequest = request.newBuilder()
-                .header("x-access-token", "foo")
+                .header("Authorization", "Token " + token)
                 .build();
+
+        Log.d("Token Intercepter", token);
 
         return chain.proceed(newRequest);
     }
