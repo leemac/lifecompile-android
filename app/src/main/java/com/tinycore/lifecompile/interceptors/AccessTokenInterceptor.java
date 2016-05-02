@@ -24,12 +24,16 @@ public class AccessTokenInterceptor implements Interceptor {
 
         String token = settings.getString("token", "");
 
-        Request newRequest = request.newBuilder()
-                .header("Authorization", "Token " + token)
-                .build();
+        if(token != "") {
+            Request newRequest = request.newBuilder()
+                    .header("Authorization", "Token " + token)
+                    .build();
 
-        Log.d("Token Intercepter", token);
+            Log.d("Token Intercepter", token);
 
-        return chain.proceed(newRequest);
+            return chain.proceed(newRequest);
+        }
+
+        return chain.proceed(request);
     }
 }

@@ -3,9 +3,9 @@ package com.tinycore.lifecompile.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Token {
+public class Note {
 
-    @SerializedName("token")
+    @SerializedName("content")
     @Expose
-    public String Token;
+    public String Content;
 }
