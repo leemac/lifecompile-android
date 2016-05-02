@@ -3,6 +3,7 @@ package com.tinycore.lifecompile.services;
 import com.tinycore.lifecompile.models.Note;
 import com.tinycore.lifecompile.models.Token;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,5 +19,5 @@ public interface LifeCompileService {
     Call<Token> login(@Field("username") String username, @Field("password") String password);
 
     @GET("api/notes/")
-    Call<List<Note>> getNotes();
+    Call<ArrayList<Note>> getNotes();
 }

@@ -11,11 +11,17 @@
     tools:context=".activities.LoginActivity"
     tools:ignore="Overdraw">
 
-<Button
+    <Button
         android:id="@+id/fab"
         android:text="@string/logoutText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_dialog_email" />
+    <ListView
+        android:id="@+id/listview_notes"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"/>
+
 
 </LinearLayout>
