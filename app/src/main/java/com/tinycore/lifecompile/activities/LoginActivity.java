@@ -32,6 +32,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         _lifcompileService = LifeCompileServiceHelper.GetService();
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        String token = settings.getString("token", "");
+
+        if(token != "") {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void forgotPasswordClick(){
