@@ -2,6 +2,7 @@ package com.tinycore.lifecompile.interceptors;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -15,12 +16,16 @@ public class AccessTokenInterceptor implements Interceptor {
             throws IOException {
         Request request = chain.request();
 
-        SharedPreferences settings = PreferenceManager
-                .getDefaultSharedPreferences(MyApp.getContext());
-        String token = settings.getString("token", "");
+        Log.d("Token Intercepter", request.url().toString());
+
+        Log.d("Token Intercepter", request.body().toString());
+//
+//        SharedPreferences settings = PreferenceManager
+//                .getDefaultSharedPreferences(MyApp.getContext());
+//        String token = settings.getString("token", "");
 
         Request newRequest = request.newBuilder()
-                .header("x-access-token", token)
+                .header("x-access-token", "foo")
                 .build();
 
         return chain.proceed(newRequest);

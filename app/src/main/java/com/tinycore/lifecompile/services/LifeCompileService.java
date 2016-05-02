@@ -10,6 +10,6 @@ import retrofit2.http.POST;
 @SuppressWarnings("unused")
 public interface LifeCompileService {
     @FormUrlEncoded
-    @POST("token")
-    Call<Token> login(@Field("email") String email, @Field("password") String password);
+    @POST("api-token-auth/")
+    Call<Token> login(@Field("username") String username, @Field("password") String password);
 }

@@ -5,5 +5,5 @@ class ApiConfig {
         return EmulatorUrl;
     }
 
-    private final static String EmulatorUrl = "http://localhost:8080";
+    private final static String EmulatorUrl = "http://192.168.43.61:8000";
 }

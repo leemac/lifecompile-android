@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.tinycore.lifecompile.R;
 
-public abstract class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
