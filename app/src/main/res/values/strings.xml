@@ -4,5 +4,6 @@
     <string name="emailText">Email</string>
     <string name="passwordText">Password</string>
     <string name="loginText">Login</string>
+    <string name="title_notes">Notes</string>
     <string name="i_forgot_my_password">I forgot my password</string>
 </resources>
