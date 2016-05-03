@@ -6,16 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.ListView;
 
 import com.tinycore.lifecompile.R;
+import com.tinycore.lifecompile.fragments.NoteEditorFragment;
 import com.tinycore.lifecompile.fragments.NoteListFragment;
-import com.tinycore.lifecompile.services.LifeCompileService;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private LifeCompileService _lifcompileService;
-    private ListView _listView;
     private Toolbar mToolbar;
 
     @Override
@@ -46,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
         switch (position) {
             case 0:
                 fragment = new NoteListFragment();
+                break;
+            case 1:
+                fragment = new NoteEditorFragment();
                 break;
             default:
                 break;

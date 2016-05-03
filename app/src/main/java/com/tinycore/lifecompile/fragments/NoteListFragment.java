@@ -65,6 +65,21 @@ public class NoteListFragment extends Fragment {
             }
         });
 
+        _listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+
+                Note gardenListItem = (Note) parent.getItemAtPosition(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", gardenListItem.Id);
+
+                ((HomeActivity) getActivity()).displayView(1, bundle);
+
+                return true;
+            }
+        });
+
         LoadList();
 //
 //        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
