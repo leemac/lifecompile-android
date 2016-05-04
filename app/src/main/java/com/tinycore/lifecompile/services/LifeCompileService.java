@@ -26,7 +26,7 @@ public interface LifeCompileService {
 
     @FormUrlEncoded
     @POST("api/notes/")
-    Call<Note> createNote(@Field("content") String content);
+    Call<Note> createNote(@Field("content") String content, @Field("tags") String tags);
 
     @DELETE("api/notes/{id}")
     Call<Note> deleteNote(@Path("id") long id);

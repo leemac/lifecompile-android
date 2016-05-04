@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.tinycore.lifecompile.R;
 import com.tinycore.lifecompile.models.Note;
+import com.tinycore.lifecompile.models.Tag;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,21 @@ public class NoteListAdapter extends ArrayAdapter<Note> {
 
         TextView textViewName = (TextView) convertView.findViewById(R.id.noteContent);
         textViewName.setText(garden.Content);
+
+        TextView textViewTags = (TextView) convertView.findViewById(R.id.noteTags);
+
+        String tags = "";
+
+        for(Tag tag : garden.TagsFull){
+            if(garden.TagsFull.indexOf(tag) == garden.TagsFull.size() - 1) {
+                tags += tag.Name;
+            }
+            else{
+                tags += tag.Name + ", ";
+            }
+        }
+
+        textViewTags.setText(tags);
 
         return convertView;
     }

@@ -19,6 +19,14 @@
         android:ems="10"
         android:id="@+id/editTextNoteContent" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Add Tags..."
+        android:ems="10"
+        android:id="@+id/editTextNoteTags" />
+
     <Button
         android:id="@+id/buttonSave"
         android:onClick="saveClick"

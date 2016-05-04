@@ -45,8 +45,9 @@ public class NewItemActivity extends AppCompatActivity {
 
     public void saveClick(View view) {
         TextView contentTextView = (TextView) this.findViewById(R.id.editTextNoteContent);
+        TextView tagsTextView = (TextView) this.findViewById(R.id.editTextNoteTags);
 
-        final Call<Note> addNoteCall = _lifcompileService.createNote(contentTextView.getText().toString());
+        final Call<Note> addNoteCall = _lifcompileService.createNote(contentTextView.getText().toString(), tagsTextView.getText().toString());
         final Context context = this;
 
         addNoteCall.enqueue(new Callback<Note>() {
