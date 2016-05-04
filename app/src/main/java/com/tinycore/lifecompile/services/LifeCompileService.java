@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 @SuppressWarnings("unused")
 public interface LifeCompileService {
@@ -20,4 +23,11 @@ public interface LifeCompileService {
 
     @GET("api/notes/")
     Call<ArrayList<Note>> getNotes();
+
+    @FormUrlEncoded
+    @POST("api/notes/")
+    Call<Note> createNote(@Field("content") String content);
+
+    @DELETE("api/notes/{id}")
+    Call<Note> deleteNote(@Path("id") long id);
 }

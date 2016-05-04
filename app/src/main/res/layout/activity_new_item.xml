@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+
+    tools:context="com.tinycore.lifecompile.activities.NewItemActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="What's going on?"
+        android:ems="10"
+        android:id="@+id/editTextNoteContent" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:onClick="saveClick"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:onClick="cancelClick"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Cancel" />
+
+
+</LinearLayout>

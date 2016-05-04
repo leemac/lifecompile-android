@@ -103,19 +103,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void SetLoading(boolean isLoading) {
-        return;
-//        View panelLogin = this.findViewById(R.id.panelLogin);
-//        View progressBar = this.findViewById(R.id.progressBarLoading);
-//
-//        assert panelLogin != null;
-//        assert progressBar != null;
-//
-//        if (isLoading) {
-//            panelLogin.setVisibility(View.GONE);
-//            progressBar.setVisibility(View.VISIBLE);
-//        } else {
-//            panelLogin.setVisibility(View.VISIBLE);
-//            progressBar.setVisibility(View.GONE);
-//        }
+        View panelLogin = this.findViewById(R.id.panelLogin);
+        View progressBar = this.findViewById(R.id.progressBarLoading);
+
+        assert panelLogin != null;
+        assert progressBar != null;
+
+        if (isLoading) {
+            panelLogin.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            panelLogin.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

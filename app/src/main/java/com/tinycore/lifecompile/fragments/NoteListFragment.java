@@ -1,9 +1,14 @@
 package com.tinycore.lifecompile.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,6 +17,7 @@ import android.widget.Toast;
 
 import com.tinycore.lifecompile.R;
 import com.tinycore.lifecompile.activities.HomeActivity;
+import com.tinycore.lifecompile.activities.NewItemActivity;
 import com.tinycore.lifecompile.adapters.NoteListAdapter;
 import com.tinycore.lifecompile.models.Note;
 import com.tinycore.lifecompile.network.LifeCompileServiceHelper;
@@ -27,6 +33,7 @@ import retrofit2.Response;
 public class NoteListFragment extends Fragment {
     private ListView _listView;
     private LifeCompileService _gardenrrService;
+    private HomeActivity _rootActivity;
 
     public NoteListFragment() {
         // Required empty public constructor
@@ -42,9 +49,62 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((HomeActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_notes);
+
+        _rootActivity =  ((HomeActivity)getActivity());
+
+        _rootActivity.getSupportActionBar().setTitle(R.string.title_notes);
 
         LoadList();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.listview_gardens) {
+            MenuInflater inflater = _rootActivity.getMenuInflater();
+            inflater.inflate(R.menu.note_list_menu, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Note note = (Note) _listView.getItemAtPosition(info.position);
+
+        switch(item.getItemId()) {
+            case R.id.edit:
+
+                return true;
+            case R.id.delete:
+
+                Call<Note> listGardenCall = _gardenrrService.deleteNote(note.Id);
+
+                final Context context = this.getActivity();
+
+                listGardenCall.enqueue(new Callback<Note>() {
+                    @Override
+                    public void onResponse(Call<Note> call, Response<Note> response) {
+                        if (response.isSuccessful()) {
+                            LoadList();
+                        } else {
+                            int statusCode = response.code();
+
+                            // handle request errors yourself
+                            ResponseBody errorBody = response.errorBody();
+                            Toast.makeText(context, errorBody.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Note> call, Throwable t) {
+                        Toast.makeText(context, "Failure! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -53,6 +113,8 @@ public class NoteListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_note_list, container, false);
 
         _listView = (ListView) rootView.findViewById(R.id.listview_gardens);
+
+        registerForContextMenu(_listView);
 
         _listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -64,32 +126,32 @@ public class NoteListFragment extends Fragment {
                 ((HomeActivity) getActivity()).displayView(4, bundle);
             }
         });
-
-        _listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-
-                Note gardenListItem = (Note) parent.getItemAtPosition(position);
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", gardenListItem.Id);
-
-                ((HomeActivity) getActivity()).displayView(1, bundle);
-
-                return true;
-            }
-        });
-
-        LoadList();
 //
-//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
+//        _listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(rootView.getContext(), NoteCreateActivity.class);
-//                startActivity(intent);
+//            public boolean onItemLongClick(AdapterView<?> parent, View view,
+//                                           int position, long id) {
+//
+//                Note gardenListItem = (Note) parent.getItemAtPosition(position);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("id", gardenListItem.Id);
+//
+//                ((HomeActivity) getActivity()).displayView(1, bundle);
+//
+//                return true;
 //            }
 //        });
+
+        LoadList();
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(), NewItemActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }

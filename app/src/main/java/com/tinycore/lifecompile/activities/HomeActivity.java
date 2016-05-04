@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.tinycore.lifecompile.R;
-import com.tinycore.lifecompile.fragments.NoteEditorFragment;
 import com.tinycore.lifecompile.fragments.NoteListFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -45,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
                 fragment = new NoteListFragment();
                 break;
             case 1:
-                fragment = new NoteEditorFragment();
+                fragment = new NoteListFragment();
                 break;
             default:
                 break;

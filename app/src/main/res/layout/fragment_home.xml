@@ -6,12 +6,13 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="10dp"
-    tools:context="com.tinycore.fragments.NoteListFragment">
+    tools:context="com.tinycore.lifecompile.fragments.NoteListFragment">
 
     <ListView
         android:id="@+id/listview_notes"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"/>
+
 
 </LinearLayout>
