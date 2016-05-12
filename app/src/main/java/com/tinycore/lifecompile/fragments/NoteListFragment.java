@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tinycore.lifecompile.R;
+import com.tinycore.lifecompile.activities.EditItemActivity;
 import com.tinycore.lifecompile.activities.HomeActivity;
 import com.tinycore.lifecompile.activities.NewItemActivity;
 import com.tinycore.lifecompile.adapters.NoteListAdapter;
@@ -74,6 +75,14 @@ public class NoteListFragment extends Fragment {
         switch(item.getItemId()) {
             case R.id.edit:
 
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", note.Id);
+
+                Intent intent = new Intent(_rootActivity, EditItemActivity.class);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+
                 return true;
             case R.id.delete:
 
@@ -126,21 +135,6 @@ public class NoteListFragment extends Fragment {
                 ((HomeActivity) getActivity()).displayView(4, bundle);
             }
         });
-//
-//        _listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view,
-//                                           int position, long id) {
-//
-//                Note gardenListItem = (Note) parent.getItemAtPosition(position);
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("id", gardenListItem.Id);
-//
-//                ((HomeActivity) getActivity()).displayView(1, bundle);
-//
-//                return true;
-//            }
-//        });
 
         LoadList();
 
@@ -171,9 +165,6 @@ public class NoteListFragment extends Fragment {
 
                     _listView.setAdapter(arrayAdapter);
                 } else {
-                    int statusCode = response.code();
-
-                    // handle request errors yourself
                     ResponseBody errorBody = response.errorBody();
                     Toast.makeText(context, errorBody.toString(), Toast.LENGTH_SHORT).show();
                 }

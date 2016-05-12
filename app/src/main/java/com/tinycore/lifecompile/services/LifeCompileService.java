@@ -12,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -24,9 +25,16 @@ public interface LifeCompileService {
     @GET("api/notes/")
     Call<ArrayList<Note>> getNotes();
 
+    @GET("api/notes/{id}")
+    Call<Note> getNote(@Path("id") long id);
+
     @FormUrlEncoded
     @POST("api/notes/")
     Call<Note> createNote(@Field("content") String content, @Field("tags") String tags);
+
+    @FormUrlEncoded
+    @PUT("api/notes/{id}")
+    Call<Note> updateNote(@Path("id") long id, @Field("content") String content, @Field("tags") String tags);
 
     @DELETE("api/notes/{id}")
     Call<Note> deleteNote(@Path("id") long id);

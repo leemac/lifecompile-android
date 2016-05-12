@@ -29,6 +29,7 @@
             android:label="Home"></activity>
 
         <activity android:name=".activities.NewItemActivity"></activity>
+        <activity android:name=".activities.EditItemActivity"></activity>
     </application>
 
 </manifest>
