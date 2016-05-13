@@ -31,10 +31,24 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ConfigureDrawer();
+
+        Bundle bundle = this.getIntent().getExtras();
+
+        if (bundle != null && bundle.getInt("loadFragment") != 0) {
+            displayView(bundle.getInt("loadFragment"), bundle);
+        } else {
+            displayView(0, null);
+        }
+    }
+
+    private void ConfigureDrawer() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mMenuItems = new ArrayList<>();
 
@@ -45,10 +59,9 @@ public class HomeActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mMenuItems));
-        // Set the list's click listener
+
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -59,32 +72,18 @@ public class HomeActivity extends AppCompatActivity {
                 R.string.drawer_close  /* "close drawer" description */
         ) {
 
-            /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle("The title");
             }
 
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("The drawer title");
             }
         };
 
-        // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        Bundle bundle = this.getIntent().getExtras();
-
-        if (bundle != null && bundle.getInt("loadFragment") != 0) {
-            displayView(bundle.getInt("loadFragment"), bundle);
-        } else {
-            displayView(0, null);
-        }
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
