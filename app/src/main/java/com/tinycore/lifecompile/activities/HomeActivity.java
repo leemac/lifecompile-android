@@ -1,6 +1,8 @@
 package com.tinycore.lifecompile.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,9 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tinycore.lifecompile.R;
 import com.tinycore.lifecompile.fragments.NoteListFragment;
+import com.tinycore.lifecompile.fragments.TagListFragment;
 
 import java.util.ArrayList;
 
@@ -52,9 +56,9 @@ public class HomeActivity extends AppCompatActivity {
 
         mMenuItems = new ArrayList<>();
 
-        mMenuItems.add("Home");
-        mMenuItems.add("Tags");
-        mMenuItems.add("Sign Out");
+        mMenuItems.add(getString(R.string.drawer_home));
+        mMenuItems.add(getString(R.string.drawer_tags));
+        mMenuItems.add(getString(R.string.drawer_logoff));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -89,7 +93,25 @@ public class HomeActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            //selectItem(position);
+            String chosenText = mMenuItems.get(position);
+
+            switch (chosenText){
+                case "Home":
+                    displayView(0, new Bundle());
+                    break;
+                case "Tags":
+                    displayView(1, new Bundle());
+                    break;
+                case "Logoff":
+                    SharedPreferences settings = PreferenceManager
+                            .getDefaultSharedPreferences(view.getContext());
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("token", "");
+                    editor.apply();
+                    break;
+            }
+
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 
@@ -101,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
                 fragment = new NoteListFragment();
                 break;
             case 1:
-                fragment = new NoteListFragment();
+                fragment = new TagListFragment();
                 break;
             default:
                 break;

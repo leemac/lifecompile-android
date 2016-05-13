@@ -1,6 +1,7 @@
 package com.tinycore.lifecompile.services;
 
 import com.tinycore.lifecompile.models.Note;
+import com.tinycore.lifecompile.models.Tag;
 import com.tinycore.lifecompile.models.Token;
 
 import java.util.ArrayList;
@@ -38,4 +39,13 @@ public interface LifeCompileService {
 
     @DELETE("api/notes/{id}")
     Call<Note> deleteNote(@Path("id") long id);
+
+    @GET("api/tags/")
+    Call<ArrayList<Tag>> getTags();
+
+    @GET("api/tags/{id}")
+    Call<Note> getTag(@Path("id") long id);
+
+    @DELETE("api/tags/{id}")
+    Call<Note> deleteTag(@Path("id") long id);
 }

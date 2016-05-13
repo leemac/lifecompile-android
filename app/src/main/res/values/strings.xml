@@ -5,8 +5,12 @@
     <string name="passwordText">Password</string>
     <string name="loginText">Login</string>
     <string name="title_notes">Notes</string>
+    <string name="title_tags">Tags</string>
     <string name="title_note_edit">Edit Note</string>
     <string name="i_forgot_my_password">I forgot my password</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="drawer_home">Home</string>
+    <string name="drawer_tags">Tags</string>
+    <string name="drawer_logoff">Log Off</string>
 </resources>
